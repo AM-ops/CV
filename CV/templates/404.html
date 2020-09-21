@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+{%block messageblock%}
+<ul class="list-group mb-4">
+  <li class="list-group-item p-4">
+    <div class="form">
+      <h2>Oops!</h2>
+      <div class="alert alert-danger" role="alert">
+        These are not the droids you are looking for!
+      </div>
+      <a class="btn btn-success" href="{% url 'home' %}">Go back Home</a>
+    </div>
+  </li>
+</ul>
+{%endblock%}

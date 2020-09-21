@@ -1,0 +1,8 @@
+django
+django-crispy-forms
+bootstrap4
+requests
+yfinance
+lxml
+PyGithub
+pocketcasts-api

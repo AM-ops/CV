@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+{%block messageblock%}
+<ul class="list-group mb-4">
+  <li class="list-group-item p-4">
+    <div class="form">
+      <h2>Success!</h2>
+      <div class="alert alert-success" role="alert">
+        Your message has been sent!
+      </div>
+      <a class="btn btn-success" href="{% url 'home' %}">Go back Home</a>
+    </div>
+  </li>
+</ul>
+{%endblock%}
