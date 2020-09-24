@@ -11,7 +11,7 @@ dayHigh = tsla_data['dayHigh']
 dayLow = tsla_data['dayLow']
 longName = tsla_data['longName']
 twoHundredDayAverage = tsla_data['twoHundredDayAverage']
-g = Github("beeb76e9fc81b8c5774df15ed5632eea78234b14")
+g = Github("token here")
 repos = g.get_user().get_repos()
 pocket = pocketcasts.Pocketcasts('user@email.com',password='optional')
 pocket_data = pocket.get_top_charts()[0:10]
