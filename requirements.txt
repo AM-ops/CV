@@ -5,4 +5,3 @@ requests
 yfinance
 lxml
 PyGithub
-pocketcasts-api
