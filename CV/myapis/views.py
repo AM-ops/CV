@@ -3,25 +3,49 @@ from django.views.generic import TemplateView
 import yfinance as yf
 import lxml
 from github import Github
-import pocketcasts
+import requests as r
+import json
 
+stocks =[]
 tsla = yf.Ticker("TSLA")
 tsla_data = tsla.info
 dayHigh = tsla_data['dayHigh']
 dayLow = tsla_data['dayLow']
 longName = tsla_data['longName']
 twoHundredDayAverage = tsla_data['twoHundredDayAverage']
-g = Github("token here")
-repos = g.get_user().get_repos()
-pocket = pocketcasts.Pocketcasts('user@email.com',password='optional')
-pocket_data = pocket.get_top_charts()[0:10]
-pocket_data_clean = []
-for items in pocket_data:
-    title = items._title
-    thumb = items._thumbnail_url
-    link = items._url
-    pocket_data_clean.append(tuple([title, thumb, link]))
+stocks.append(tuple([longName, dayHigh, dayLow, twoHundredDayAverage]))
 
+msft = yf.Ticker("MSFT")
+msft_data = msft.info
+dayHigh = msft_data['dayHigh']
+dayLow = msft_data['dayLow']
+longName = msft_data['longName']
+twoHundredDayAverage = msft_data['twoHundredDayAverage']
+stocks.append(tuple([longName, dayHigh, dayLow, twoHundredDayAverage]))
+
+aapl = yf.Ticker("AAPL")
+aapl_data = aapl.info
+dayHigh = aapl_data['dayHigh']
+dayLow = aapl_data['dayLow']
+longName = aapl_data['longName']
+twoHundredDayAverage = aapl_data['twoHundredDayAverage']
+stocks.append(tuple([longName, dayHigh, dayLow, twoHundredDayAverage]))
+
+goog = yf.Ticker("GOOG")
+goog_data = goog.info
+dayHigh = goog_data['dayHigh']
+dayLow = goog_data['dayLow']
+longName = goog_data['longName']
+twoHundredDayAverage = goog_data['twoHundredDayAverage']
+stocks.append(tuple([longName, dayHigh, dayLow, twoHundredDayAverage]))
+
+#token deleted in this file
+g = Github("token_here")
+repos = g.get_user().get_repos(visibility='public')
+
+fact_data = r.get("https://cat-fact.herokuapp.com/facts")
+fact = fact_data.json()['all'][:1]
+fact_text = fact[0]['text']
 
 class APIPage(TemplateView):
     """docstring for APIPage."""
@@ -29,10 +53,8 @@ class APIPage(TemplateView):
 
     def get_context_data(self,**kwargs):
         context = super().get_context_data(**kwargs)
-        context['longName'] = longName
-        context['dayHigh'] = dayHigh
-        context['dayLow'] = dayLow
-        context['twoHundredDayAverage'] = twoHundredDayAverage
+        context['stocks'] = stocks
         context['repos'] = repos
-        context['pocket_data_clean'] = pocket_data_clean
+        context['fact_text'] = fact_text
         return context
+
