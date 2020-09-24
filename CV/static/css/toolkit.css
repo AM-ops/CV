@@ -1,8 +1,8 @@
 @charset "UTF-8";
 /*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
-*{font-family: 'Open Sans', sans-serif;}
+*{font-family: 'IBM Plex Mono', monospace;}
 html {
-    font-family: 'Open Sans', sans-serif; !important;
+    font-family: 'IBM Plex Mono', monospace;
     line-height: 1.15;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%; }
