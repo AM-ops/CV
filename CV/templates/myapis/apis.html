@@ -21,7 +21,7 @@
     <div class="form">
       <h2>My Github Public Repos</h2>
       {% for item in repos %}
-      <h4><a href='{{item.html_url}}'>{{ item.name }}</a></h4>
+      <h4><a href='{{item.html_url}}' class="btn btn-outline-dark" style="border-style: none;">{{ item.name }}</a></h4>
       <ul class="list-unstyled list-spaced">
         <li>Description: {{ item.description }}</li>
         <li>Date created: {{ item.created_at }}</li>
