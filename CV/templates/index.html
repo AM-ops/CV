@@ -106,7 +106,7 @@
         <li class="list-group-item p-4 justify-content-center">
           <div class="form text-center">
             <h2>Technical Expertise</h2>
-              <p><a class="btn btn-dark" href="{% static 'docs/CV.pdf' %}" >Download my full CV here!</a></p>
+              <p><a class="btn btn-outline-info" href="{% static 'docs/CV.pdf' %}" >Download my full CV here!</a></p>
           </div>
         </li>
       </ul>
@@ -184,20 +184,76 @@
           </div>
         </li>
       </ul>
+    </ul>
 
-      <div class="card visible-md-block visible-lg-block mb-4">
-        <div class="card-block text-center">
-          <ul class="list-unstyled list-spaced">
-            <a href="{% url 'myapis:all'%}">
-            <li class="list-inline-item p-4"><img class="rounded-circle" src="{% static 'img/api.png'%}" alt="" width="50px" height="50px"><p>API Implementations - Take me there already!</p></li>
-          </a>
-          </ul>
-        </div>
-      </div>
+<ul class="list-group mb-4">
+        <li class="list-group-item p-4">
+          <div class="input-group">
+            <h2>External APIs implemented below!</h2>
+          </div>
+        </li>
+</ul>
 
+<ul class="list-group mb-4">
+  <li class="list-group-item p-4">
+    <div class="form">
+      <h2>Favorite Stocks</h2>
+      {% for longName, dayHigh, dayLow, twoHundredDayAverage in stocks%}
+      <h4>{{ longName }}</h4>
+      <ul class="list-unstyled list-spaced">
+        <li>Daily high: {{ dayHigh }}</li>
+        <li>Daily low: {{ dayLow }}</li>
+        <li>200 Day Average: {{ twoHundredDayAverage }}</li>
+      </ul>
+      {% endfor %}
+    </div>
+  </li>
+</ul>
+
+<ul class="list-group mb-4">
+  <li class="list-group-item p-4">
+    <div class="input-group">
+      <h2>My Github Public Repos</h2>
+      <ul class="list-group list-unstyled list-spaced">
+        {% for item in repos %}
+        <ul class="list-unstyled list-group-item-action p-1">
+            <li><a href='{{item.html_url}}'>{{ item.name }}</a></li>
+            <li>Description: {{ item.description }}</li>
+            <li>Date created: {{ item.created_at }}</li>
+            <li>Language: {{ item.language }}</li>
+        </ul>
+        {% endfor%}
+      </ul>
+    </div>
+  </li>
+</ul>
+
+<ul class="list-group mb-4">
+  <li class="list-group-item p-4">
+    <div class="input-group">
+      <h2>NYT Most Viewed Articles for this Month</h2>
+      <ul class="list-group list-unstyled list-spaced">
+        {% for title, url in articles%}
+            <li><a class="list-group-item list-group-item-action" href='{{url}}'>{{title}}</a></li>
+        {% endfor%}
+      </ul>
+    </div>
+    </li>
+ </ul>
+
+ <ul class="list-group mb-4">
+        <li class="list-group-item p-4">
+          <div class="input-group">
+            <h4>My Social Media</h4>
+            <ul class="list-unstyled list-space text-center">
+              <a href="https://www.github.com/AM-ops"><li class="list-inline-item p-4"><img class="rounded-circle" src="{% static 'img/gt.png'%}" alt="" width="50px" height="50px"><p>Github</p></li></a>
+              <a href="https://www.linkedin.com/in/affaan-muhammad"><li class="list-inline-item p-4"><img class="rounded-circle" src="{% static 'img/lk.png'%}" alt="" width="50px" height="50px"><p>LinkedIn</p></li></a>
+            </ul>
+          </div>
+        </li>
+</ul>
     </div>
   </div>
 </div>
-
 </body>
 </html>
