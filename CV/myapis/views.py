@@ -1,5 +1,5 @@
-from django.views.generic import TemplateView
 from django.shortcuts import render
+from django.views.generic import TemplateView
 import yfinance as yf
 import lxml
 from github import Github
@@ -42,28 +42,12 @@ stocks.append(tuple([longName, dayHigh, dayLow, twoHundredDayAverage]))
 g = Github("token_here")
 repos = g.get_user().get_repos(visibility='public')
 
-news_data = r.get('https://api.nytimes.com/svc/mostpopular/v2/viewed/30.json?api-key=apikey_here')
-newsdata = news_data.json()
-articles=[]
-for item in newsdata['results']:
-    title = item['title']
-    url = item['url']
-    articles.append(tuple([title,url]))
-
-class HomePage(TemplateView):
-    """docstring for HomePage."""
-    template_name = 'index.html'
+class APIPage(TemplateView):
+    """docstring for APIPage."""
+    template_name = 'myapis/apis.html'
 
     def get_context_data(self,**kwargs):
         context = super().get_context_data(**kwargs)
         context['stocks'] = stocks
         context['repos'] = repos
-        context['articles'] = articles
         return context
-
-class SuccessPage(TemplateView):
-    """docstring for HomePage."""
-    template_name = 'success.html'
-
-def handler404(request, exception):
-       return render(request, '404.html')
