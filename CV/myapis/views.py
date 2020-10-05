@@ -1,5 +1,5 @@
-from django.shortcuts import render
 from django.views.generic import TemplateView
+from django.shortcuts import render
 import yfinance as yf
 import lxml
 from github import Github
@@ -39,22 +39,31 @@ longName = goog_data['longName']
 twoHundredDayAverage = goog_data['twoHundredDayAverage']
 stocks.append(tuple([longName, dayHigh, dayLow, twoHundredDayAverage]))
 
-#token deleted in this file
 g = Github("token_here")
 repos = g.get_user().get_repos(visibility='public')
 
-fact_data = r.get("https://cat-fact.herokuapp.com/facts")
-fact = fact_data.json()['all'][:1]
-fact_text = fact[0]['text']
+news_data = r.get('https://api.nytimes.com/svc/mostpopular/v2/viewed/30.json?api-key=apikey_here')
+newsdata = news_data.json()
+articles=[]
+for item in newsdata['results']:
+    title = item['title']
+    url = item['url']
+    articles.append(tuple([title,url]))
 
-class APIPage(TemplateView):
-    """docstring for APIPage."""
-    template_name = 'myapis/apis.html'
+class HomePage(TemplateView):
+    """docstring for HomePage."""
+    template_name = 'index.html'
 
     def get_context_data(self,**kwargs):
         context = super().get_context_data(**kwargs)
         context['stocks'] = stocks
         context['repos'] = repos
-        context['fact_text'] = fact_text
+        context['articles'] = articles
         return context
 
+class SuccessPage(TemplateView):
+    """docstring for HomePage."""
+    template_name = 'success.html'
+
+def handler404(request, exception):
+       return render(request, '404.html')
